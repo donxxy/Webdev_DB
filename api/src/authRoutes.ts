@@ -29,7 +29,8 @@ router.post(
       const result = await pool.query(
         `
             INSERT INTO users (username, password_hash)
-            VALUES ($1, $2)`,
+            VALUES ($1, $2)
+            RETURNING id, username, created_at`,
         [username, passwordHash],
       );
       res.status(201).json({
